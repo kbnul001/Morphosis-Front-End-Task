@@ -2,6 +2,7 @@ import React from 'react';
 
 const Product = (props) => {
     const { name, image, price, stock, createdAt, material } = props.product;
+    const { handleAddtoCart } = props;
     let createdDate = new Date(createdAt);
     return (
         <div className=" p-4 rounded-lg shadow-md hover:shadow-xl">
@@ -22,6 +23,7 @@ const Product = (props) => {
                 {/* button  */}
                 <div className="text-center ">
                     <button
+                        onClick={() => handleAddtoCart(props.product)}
                         disabled={!stock}
                         className={
                             !stock ? "bg-gray-400 w-44 h-8 mt-4  text-white rounded-md focus:ring-2 focus:bg-purple-600 " : "w-44 h-8 mt-4 bg-purple-600 text-white rounded-md focus:ring-2 focus:bg-purple-600 hover:bg-purple-400"

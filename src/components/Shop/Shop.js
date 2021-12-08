@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../Product/Product';
 
-const Shop = () => {
+const Shop = (props) => {
     const [products, setProducts] = useState([]);
     const [searchedProducts, setSearchedProducts] = useState([]);
 
@@ -22,14 +22,15 @@ const Shop = () => {
     return (
         <div className="">
             {/* search bar */}
-            <div className="relative border-2 mb-16">
-                <div className="absolute top-4 left-3"> <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div> <input onChange={handleSearch} type="text" className="h-14 w-96 pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none" placeholder="Search by material..." />
+            <div className="relative    mb-16">
+                <div className="absolute top-4 left-3"> <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div> <input onChange={handleSearch} type="text" className="focus:shadow focus:outline-none border h-14 w-96 pl-10 pr-20 rounded-lg z-0 w-full" placeholder="Search by material..." />
                 {/* <div className="absolute top-2 right-2"> <button className="h-10 w-20 text-white rounded-lg bg-purple-500 hover:bg-purple-600">Search</button> </div> */}
             </div>
             {/* products display */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {
                     searchedProducts.map(pd => <Product
+                        handleAddtoCart={props.handleAddtoCart}
                         key={pd.name}
                         product={pd}
                     ></Product>)
