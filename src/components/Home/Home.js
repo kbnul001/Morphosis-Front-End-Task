@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Context/ContextProvider';
-import useProducts from '../../cutomhooks/useProducts';
 import Cart from '../Cart/Cart';
 import Shop from '../Shop/Shop';
 
@@ -10,7 +9,9 @@ const Home = () => {
 
     //reduce stock after adding to cart
     const reduceStock = (name) => {
+        console.log(name)
         const itemToReduce = products.find(item => name === item.name);
+        console.log(itemToReduce);
         itemToReduce.stock--;
     }
 
@@ -43,7 +44,7 @@ const Home = () => {
                     cart={cart}
                     handleAddtoCart={handleAddtoCart}></Shop>
             </section>
-            <aside className="w-1/4 pl-5 border-l-2 fixed right-0">
+            <aside className="w-1/4 pl-5 border-l-2 fixed right-6">
                 <Cart cart={cart}></Cart>
             </aside>
         </div>

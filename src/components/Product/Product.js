@@ -13,10 +13,12 @@ const Product = (props) => {
             {/* Body section  */}
             <div className="mt-4 space-y-2 text-center">
                 <h3 className="text-xl font-semibold text-center my-3 text-purple-600">{name}</h3>
-                <div className="flex justify-between">
-                    <p className="">Created with:  <span>{material}</span> </p>
-                    <p className="mr-4">In Stock: {stock}</p>
-                </div>
+
+                <p className="">Created with:  <span>{material}</span> </p>
+                {stock ? <p className="mr-4 ">In Stock: {stock}</p>
+                    :
+                    <p className="mr-4 text-red-400">Out of Stock</p>}
+
                 <h3 className="text-xl ml-auto text-yellow-400 font-bold">&#3647; {price}</h3>
                 <p className="text-sm font-light"><i className="far fa-clock text-purple-600"></i> Created At: {createdDate.toLocaleDateString()}</p>
 
