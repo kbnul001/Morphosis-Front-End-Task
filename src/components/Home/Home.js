@@ -9,10 +9,33 @@ const Home = () => {
 
     //reduce stock after adding to cart
     const reduceStock = (name) => {
-        console.log(name)
         const itemToReduce = products.find(item => name === item.name);
-        console.log(itemToReduce);
         itemToReduce.stock--;
+    }
+
+    const handleDecreaseItem = (name) => {
+        let newCart = [...cart];
+        //recover to stock
+        const itemToReduceStock = products.find(item => name === item.name);
+        itemToReduceStock.stock++;
+        //remove from cart
+        const itemToReduce = newCart.find(item => name === item.name);
+        itemToReduce.quantity--;
+        if (itemToReduce.quantity === 0) {
+            newCart = newCart.filter(item => item.name !== name);
+        }
+        setCart(newCart);
+    }
+
+    const handleIncreaseItem = (name) => {
+        //remove from stock
+        const item = products.find(pd => pd.name === name);
+        handleAddtoCart(item);
+        //add to cart
+        // let newCart = [...cart];
+        // const itemToIncrease = newCart.find(item => name === item.name);
+        // itemToIncrease.quantity++;
+        // setCart(newCart);
     }
 
     // handle add to cart
@@ -38,14 +61,17 @@ const Home = () => {
     }
 
     return (
-        <div className="md:flex">
-            <section className="w-2/3 md:mx-12 ">
+        <div className="flex flex-col-reverse md:flex-row">
+            <section className="md:w-2/3 md:mx-12 mx-4">
                 <Shop
                     cart={cart}
                     handleAddtoCart={handleAddtoCart}></Shop>
             </section>
-            <aside className="w-1/4 pl-5 border-l-2 fixed right-6">
-                <Cart cart={cart}></Cart>
+            <aside className="md:w-1/4 pl-5 border-l-2 md:fixed right-6 mb-8">
+                <Cart
+                    handleIncreaseItem={handleIncreaseItem}
+                    handleDecreaseItem={handleDecreaseItem}
+                    cart={cart}></Cart>
             </aside>
         </div>
     );

@@ -26,7 +26,7 @@ const Shop = (props) => {
 
             </div>
             {/* products display */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 md:mx-0 gap-12">
                 {
                     searchedProducts.map(pd => <Product
                         handleAddtoCart={props.handleAddtoCart}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import CartItem from '../CartItem/CartItem';
 
-const Cart = ({ cart }) => {
-
+const Cart = (props) => {
+    const { cart } = props;
     const countTotalItems = () => {
         let count = 0;
         cart.forEach(item => {
@@ -15,7 +15,7 @@ const Cart = ({ cart }) => {
         cart.forEach(item => {
             total = total + item.quantity * item.price;
         })
-        return total;
+        return total.toFixed(2);
     }
 
     return (
@@ -34,6 +34,9 @@ const Cart = ({ cart }) => {
                 <tbody className="">
                     {
                         cart.map(item => <tr> <CartItem
+                            key={item.name}
+                            handleDecreaseItem={props.handleDecreaseItem}
+                            handleIncreaseItem={props.handleIncreaseItem}
                             product={item}
                         ></CartItem> </tr>)
                     }
