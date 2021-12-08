@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../Context/ContextProvider';
 import Product from '../Product/Product';
 
 const Shop = (props) => {
-    const [products, setProducts] = useState([]);
-    const [searchedProducts, setSearchedProducts] = useState([]);
+
+    const { products } = useContext(AuthContext);
+    const [searchedProducts, setSearchedProducts] = useState(products);
+
+    useEffect(() => {
+        setSearchedProducts(products)
+    }, [products])
+
 
     const handleSearch = (e) => {
         const searchKey = e.target.value;
@@ -11,20 +18,12 @@ const Shop = (props) => {
         setSearchedProducts(newProducts);
     }
 
-    useEffect(() => {
-        fetch('http://localhost:8000/api/robots')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data.data);
-                setSearchedProducts(data.data);
-            })
-    }, [])
     return (
         <div className="">
             {/* search bar */}
             <div className="relative    mb-16">
-                <div className="absolute top-4 left-3"> <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div> <input onChange={handleSearch} type="text" className="focus:shadow focus:outline-none border h-14 w-96 pl-10 pr-20 rounded-lg z-0 w-full" placeholder="Search by material..." />
-                {/* <div className="absolute top-2 right-2"> <button className="h-10 w-20 text-white rounded-lg bg-purple-500 hover:bg-purple-600">Search</button> </div> */}
+                <div className="absolute top-4 left-3"> <i className="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i> </div> <input onChange={handleSearch} type="text" className="focus:shadow focus:outline-none border h-14 pl-10 pr-20 rounded-lg z-0 w-full" placeholder="Search by material..." />
+
             </div>
             {/* products display */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
